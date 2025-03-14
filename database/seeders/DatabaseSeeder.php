@@ -16,12 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin2@gmail.com',
-            'password' => bcrypt('12345678'),
-            'role' => 'admin',
-        ]);
+        if (!User::where('email', 'admin2@gmail.com')->exists()) {
+            User::create([
+                'name' => 'Admin',
+                'email' => 'admin2@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+            ]);
+        }
+
 
         User::factory()->count(20)->create();
     }
